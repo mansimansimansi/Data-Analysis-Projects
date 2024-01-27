@@ -1,0 +1,88 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+Backend MacOSX is interactive backend. Turning interactive mode on.
+import matplotlib.pyplot as plt
+import matplotlib.mlab as mlab
+import matplotlib
+plt.style.use('ggplot')
+df = pd.read_csv(r'/Users/mansiverma/Downloads/movies.csv')
+df
+                                                name  ... runtime
+0                                        The Shining  ...   146.0
+1                                    The Blue Lagoon  ...   104.0
+2     Star Wars: Episode V - The Empire Strikes Back  ...   124.0
+3                                          Airplane!  ...    88.0
+4                                         Caddyshack  ...    98.0
+                                              ...  ...     ...
+7663                                    More to Life  ...    90.0
+7664                                     Dream Round  ...    90.0
+7665                                   Saving Mbango  ...     NaN
+7666                                    It's Just Us  ...   120.0
+7667                                       Tee em el  ...   102.0
+[7668 rows x 15 columns]
+for col in df.columns:
+    pct_missing = np.mean(df[col].isnull())
+    print('{} - {}%'.format(col, round(pct_missing*100)))
+    
+name - 0%
+rating - 1%
+genre - 0%
+year - 0%
+released - 0%
+score - 0%
+votes - 0%
+director - 0%
+writer - 0%
+star - 0%
+country - 0%
+budget - 28%
+gross - 2%
+company - 0%
+runtime - 0%
+print(df.dtypes)
+name         object
+rating       object
+genre        object
+year          int64
+released     object
+score       float64
+votes       float64
+director     object
+writer       object
+star         object
+country      object
+budget      float64
+gross       float64
+company      object
+runtime     float64
+dtype: object
+df.boxplot(column=['gross'])
+<Axes: >
+df.drop_duplicates()
+                                                name  ... runtime
+0                                        The Shining  ...   146.0
+1                                    The Blue Lagoon  ...   104.0
+2     Star Wars: Episode V - The Empire Strikes Back  ...   124.0
+3                                          Airplane!  ...    88.0
+4                                         Caddyshack  ...    98.0
+                                              ...  ...     ...
+7663                                    More to Life  ...    90.0
+7664                                     Dream Round  ...    90.0
+7665                                   Saving Mbango  ...     NaN
+7666                                    It's Just Us  ...   120.0
+7667                                       Tee em el  ...   102.0
+[7668 rows x 15 columns]
+df.sort_values(by=['gross'], inplace=False, ascending=False)
+                                            name  ... runtime
+5445                                      Avatar  ...   162.0
+7445                           Avengers: Endgame  ...   181.0
+3045                                     Titanic  ...   194.0
+6663  Star Wars: Episode VII - The Force Awakens  ...   138.0
+7244                      Avengers: Infinity War  ...   149.0
+                                          ...  ...     ...
+7663                                More to Life  ...    90.0
+7664                                 Dream Round  ...    90.0
+7665                               Saving Mbango  ...     NaN
+7666                                It's Just Us  ...   120.0
+7667                                   Tee em el  ...   102.0
